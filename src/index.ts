@@ -1,6 +1,10 @@
+// dependencies
 import express from "express";
 import dotenv from "dotenv";
 dotenv.config();
+
+// file
+import { connection } from "./connections/dbconfig";
 
 const port = process.env.PORT || 3000;
 const app = express();
@@ -18,6 +22,7 @@ app.get("/", (req, res) => {
 
 app.listen(port, async () => {
     try {
+        await connection;
         console.log(`Server is running on port: ${port}`);
     } catch (error) {
         console.log("error while starting the server: ", error);
